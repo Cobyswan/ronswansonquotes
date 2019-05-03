@@ -22,12 +22,9 @@ export default class App extends Component {
   checkIfVoted() {
     let { quote } = this.state;
     if (this.state.votes) {
-      console.log('Compared Quote:', quote)
-      for(let i = 0; i < this.state.votes.length; i++){
-        console.log(this.state.votes[i])
-        if(this.state.votes[i][0] === quote[0]){
-          this.setState({voted: true})
-          console.log("Did vote:", this.state.voted);
+      for (let i = 0; i < this.state.votes.length; i++) {
+        if (this.state.votes[i][0] === quote[0]) {
+          this.setState({ voted: true });
         }
       }
     }
@@ -104,7 +101,6 @@ export default class App extends Component {
   }
 
   render() {
-    console.log('render vote:', this.state.voted);
     return (
       <div className="mainContainer">
         <img
@@ -122,20 +118,20 @@ export default class App extends Component {
             ``
           ) : (
             <div className="mainContainer__ratingButtons">
-              {
-                !this.state.voted
-              ?
-              <div>
-              <button onClick={() => this.rateQuote(1)}>1</button>
-              <button onClick={() => this.rateQuote(2)}>2</button>
-              <button onClick={() => this.rateQuote(3)}>3</button>
-              <button onClick={() => this.rateQuote(4)}>4</button>
-              <button onClick={() => this.rateQuote(5)}>5</button>
-              </div>
-              :
-              `You've already voted`
-              }
-              <div className="mainContainer__Average">{` Average Rating: ${this.state.averageRating}`}</div>
+              {!this.state.voted ? (
+                <div>
+                  <button onClick={() => this.rateQuote(1)}>1</button>
+                  <button onClick={() => this.rateQuote(2)}>2</button>
+                  <button onClick={() => this.rateQuote(3)}>3</button>
+                  <button onClick={() => this.rateQuote(4)}>4</button>
+                  <button onClick={() => this.rateQuote(5)}>5</button>
+                </div>
+              ) : (
+                `You've already voted!`
+              )}
+              <div className="mainContainer__Average">{` Average Rating: ${
+                this.state.averageRating
+              }`}</div>
             </div>
           )}
         </div>
